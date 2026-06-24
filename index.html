@@ -1,726 +1,642 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en" data-theme="dark">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mohamed Mahmoud — Frontend Developer & Competitive Programmer</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          fontFamily: {
-            sans: ['Inter', 'sans-serif'],
-            display: ['Oswald', 'sans-serif'],
-          },
-          colors: {
-            brand: '#5423E7',
-            accent: '#FF3366',
-            dark: '#0f172a',
-          }
-        }
-      }
-    }
-  </script>
-  <style>
-    @keyframes fadeIn { from{opacity:0} to{opacity:1} }
-    @keyframes slideIn { from{opacity:0;transform:translateY(30px)} to{opacity:1;transform:translateY(0)} }
-    @keyframes blurIn { from{opacity:0;filter:blur(12px)} to{opacity:1;filter:blur(0)} }
-    @keyframes blob { 0%,100%{transform:translate(0,0) scale(1)} 33%{transform:translate(30px,-20px) scale(1.1)} 66%{transform:translate(-20px,20px) scale(0.9)} }
-    @keyframes countUp { from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:translateY(0)} }
-    @keyframes lineGrow { from{width:0} to{width:100%} }
-    @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mohamed Mahmoud — Frontend Developer</title>
+  <meta name="description" content="Mohamed Mahmoud — Junior Frontend Developer & Competitive Programmer based in Egypt. Codeforces Specialist. 1000+ problems solved." />
 
-    .animate-fadeIn { animation: fadeIn 0.8s ease-out both }
-    .animate-slideIn { animation: slideIn 0.8s cubic-bezier(0.16,1,0.3,1) both }
-    .animate-blurIn { animation: blurIn 1s ease-out both }
-    .animate-blob { animation: blob 7s infinite ease-in-out }
-    .animate-float { animation: float 3s ease-in-out infinite }
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
 
-    .delay-100 { animation-delay: 100ms }
-    .delay-200 { animation-delay: 200ms }
-    .delay-300 { animation-delay: 300ms }
-    .delay-500 { animation-delay: 500ms }
-    .delay-700 { animation-delay: 700ms }
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 
-    .text-gradient {
-      background: linear-gradient(to right, #a855f7, #6366f1);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    .card-glow:hover {
-      box-shadow: 0 0 30px rgba(84,35,231,0.15), 0 25px 50px -12px rgba(0,0,0,0.25);
-    }
-
-    .skill-bar {
-      animation: lineGrow 1.5s ease-out both;
-    }
-
-    .project-card::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      border-radius: inherit;
-      padding: 1px;
-      background: linear-gradient(135deg, rgba(84,35,231,0.3), transparent, rgba(255,51,102,0.3));
-      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-      -webkit-mask-composite: xor;
-      mask-composite: exclude;
-      opacity: 0;
-      transition: opacity 0.5s;
-    }
-    .project-card:hover::before { opacity: 1; }
-
-    ::-webkit-scrollbar { width: 6px }
-    ::-webkit-scrollbar-track { background: #0f172a }
-    ::-webkit-scrollbar-thumb { background: #5423E7; border-radius: 3px }
-
-    .toast {
-      position: fixed; bottom: 2rem; right: 2rem;
-      background: #22c55e; color: white;
-      padding: 12px 24px; border-radius: 12px;
-      font-size: 14px; font-weight: 500;
-      transform: translateY(100px); opacity: 0;
-      transition: all 0.4s cubic-bezier(0.16,1,0.3,1);
-      z-index: 9999;
-    }
-    .toast.show { transform: translateY(0); opacity: 1 }
-  </style>
+  <link rel="stylesheet" href="style.css" />
 </head>
-<body class="bg-white text-dark font-sans antialiased">
+<body>
 
-  <!-- NAVIGATION -->
-  <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
-    <div class="max-w-7xl mx-auto px-6 lg:px-8">
-      <div class="flex items-center justify-between h-16 lg:h-20">
-        <a href="#hero" class="font-display font-700 text-xl tracking-tight uppercase">
-          <span class="text-gradient">M.</span><span class="text-dark">Mahmoud</span>
-        </a>
-        <div class="hidden md:flex items-center gap-8">
-          <a href="#about" class="text-sm font-medium text-slate-500 hover:text-dark transition-colors">About</a>
-          <a href="#skills" class="text-sm font-medium text-slate-500 hover:text-dark transition-colors">Skills</a>
-          <a href="#projects" class="text-sm font-medium text-slate-500 hover:text-dark transition-colors">Projects</a>
-          <a href="#achievements" class="text-sm font-medium text-slate-500 hover:text-dark transition-colors">Achievements</a>
-          <a href="#contact" class="bg-dark text-white text-xs font-bold uppercase tracking-wider px-6 py-3 rounded-full hover:bg-brand transition-all duration-300">
-            Contact Me
-          </a>
-        </div>
-        <button id="menuBtn" class="md:hidden p-2 rounded-lg hover:bg-slate-100 transition-colors">
-          <iconify-icon icon="lucide:menu" width="24" height="24"></iconify-icon>
+  <!-- Custom Cursor -->
+  <div id="cursor-dot"></div>
+  <div id="cursor-ring"></div>
+
+  <!-- Loader -->
+  <div id="loader">
+    <div class="loader-text">
+      <span>M</span><span>.</span><span>M</span><span>a</span><span>h</span><span>m</span><span>o</span><span>u</span><span>d</span>
+    </div>
+    <div class="loader-bar"><span></span></div>
+  </div>
+
+  <!-- Noise Overlay -->
+  <div class="noise"></div>
+
+  <!-- NAV -->
+  <nav id="navbar">
+    <div class="nav-inner">
+      <a href="#hero" class="nav-logo">MM<span class="dot">.</span></a>
+      <ul class="nav-links">
+        <li><a href="#about" class="nav-link">About</a></li>
+        <li><a href="#skills" class="nav-link">Skills</a></li>
+        <li><a href="#projects" class="nav-link">Work</a></li>
+        <li><a href="#experience" class="nav-link">Journey</a></li>
+        <li><a href="#contact" class="nav-link">Contact</a></li>
+      </ul>
+      <div class="nav-right">
+        <button id="theme-toggle" class="theme-btn" aria-label="Toggle theme">
+          <i class="fa-solid fa-moon" id="theme-icon"></i>
+        </button>
+        <a href="https://docs.google.com/document/d/1dBStdwqow_vI_nFA4Ti6ppSMyKnlEqar/edit?usp=sharing&ouid=118151326517253373276&rtpof=true&sd=true" target="_blank" class="btn-hire">Hire Me</a>
+        <button class="hamburger" id="hamburger" aria-label="Menu">
+          <span></span><span></span>
         </button>
       </div>
     </div>
-    <!-- Mobile Menu -->
-    <div id="mobileMenu" class="md:hidden hidden bg-white/95 backdrop-blur-xl border-t border-slate-100">
-      <div class="px-6 py-4 flex flex-col gap-3">
-        <a href="#about" class="mobile-link py-2 text-sm font-medium text-slate-600 hover:text-brand transition-colors">About</a>
-        <a href="#skills" class="mobile-link py-2 text-sm font-medium text-slate-600 hover:text-brand transition-colors">Skills</a>
-        <a href="#projects" class="mobile-link py-2 text-sm font-medium text-slate-600 hover:text-brand transition-colors">Projects</a>
-        <a href="#achievements" class="mobile-link py-2 text-sm font-medium text-slate-600 hover:text-brand transition-colors">Achievements</a>
-        <a href="#contact" class="mobile-link bg-dark text-white text-xs font-bold uppercase tracking-wider px-6 py-3 rounded-full text-center hover:bg-brand transition-all duration-300">Contact Me</a>
-      </div>
+    <!-- Mobile menu -->
+    <div class="mobile-menu" id="mobile-menu">
+      <a href="#about" class="mob-link">About</a>
+      <a href="#skills" class="mob-link">Skills</a>
+      <a href="#projects" class="mob-link">Work</a>
+      <a href="#experience" class="mob-link">Journey</a>
+      <a href="#contact" class="mob-link">Contact</a>
     </div>
   </nav>
 
-  <!-- HERO SECTION -->
-  <section id="hero" class="relative min-h-screen flex items-center overflow-hidden bg-dark">
-    <!-- Background Blobs -->
-    <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-brand/30 rounded-full blur-3xl animate-blob"></div>
-    <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-500/20 rounded-full blur-3xl animate-blob" style="animation-delay:2s"></div>
-    <div class="absolute top-1/2 left-1/2 w-64 h-64 bg-accent/10 rounded-full blur-3xl animate-blob" style="animation-delay:4s"></div>
+  <!-- =========  HERO  ========= -->
+  <section id="hero" class="hero-section">
 
-    <!-- Grid Pattern -->
-    <div class="absolute inset-0 opacity-5" style="background-image: radial-gradient(circle, #fff 1px, transparent 1px); background-size: 40px 40px;"></div>
+    <!-- Gradient orbs -->
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
 
-    <div class="relative max-w-7xl mx-auto px-6 lg:px-8 py-32 lg:py-0 w-full">
-      <div class="grid lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-        <!-- Text -->
-        <div class="lg:col-span-7 text-white">
-          <div class="animate-fadeIn">
-            <span class="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/10 rounded-full px-4 py-2 text-xs font-bold uppercase tracking-widest text-white/70 mb-8">
-              <span class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
-              Open to opportunities
-            </span>
-          </div>
-          <h1 class="font-display font-bold text-5xl sm:text-6xl lg:text-7xl xl:text-8xl tracking-tighter uppercase leading-[0.85] animate-slideIn delay-100">
-            Mohamed<br>
-            <span class="text-gradient">Mahmoud</span>
-          </h1>
-          <p class="mt-6 lg:mt-8 text-lg lg:text-xl text-white/60 font-light leading-relaxed max-w-lg animate-slideIn delay-200">
-            Junior Frontend Developer & Competitive Programmer. Turning complex problems into elegant, performant web experiences.
-          </p>
-          <div class="mt-8 lg:mt-10 flex flex-wrap items-center gap-4 animate-slideIn delay-300">
-            <a href="#projects" class="bg-brand hover:bg-purple-600 text-white text-xs font-bold uppercase tracking-wider px-8 py-4 rounded-full transition-all duration-300 hover:shadow-[0_0_30px_rgba(84,35,231,0.4)]">
-              View My Work
-            </a>
-            <a href="#contact" class="border border-white/20 hover:border-white/40 text-white text-xs font-bold uppercase tracking-wider px-8 py-4 rounded-full transition-all duration-300 hover:bg-white/5">
-              Get in Touch
-            </a>
-          </div>
-          <!-- Social Links -->
-          <div class="mt-10 flex items-center gap-5 animate-fadeIn delay-500">
-            <a href="https://github.com/mohamed" target="_blank" class="text-white/40 hover:text-white transition-colors duration-300">
-              <iconify-icon icon="lucide:github" width="20" height="20"></iconify-icon>
-            </a>
-            <a href="https://linkedin.com/in/mohamed" target="_blank" class="text-white/40 hover:text-white transition-colors duration-300">
-              <iconify-icon icon="lucide:linkedin" width="20" height="20"></iconify-icon>
-            </a>
-            <a href="https://codeforces.com/profile/mohamed" target="_blank" class="text-white/40 hover:text-white transition-colors duration-300">
-              <iconify-icon icon="lucide:code-2" width="20" height="20"></iconify-icon>
-            </a>
-            <a href="mailto:myworkmoud@gmail.com" class="text-white/40 hover:text-white transition-colors duration-300">
-              <iconify-icon icon="lucide:mail" width="20" height="20"></iconify-icon>
-            </a>
-          </div>
+    <!-- Grid lines bg -->
+    <div class="grid-lines"></div>
+
+    <div class="hero-container">
+      <div class="hero-left">
+        <!-- Status pill -->
+        <div class="status-pill">
+          <span class="pulse-dot"></span>
+          Available for opportunities
         </div>
 
-        <!-- Visual -->
-        <div class="lg:col-span-5 hidden lg:flex justify-center animate-blurIn delay-300">
-          <div class="relative">
-            <div class="w-72 h-72 xl:w-80 xl:h-80 rounded-3xl overflow-hidden border-2 border-white/10 rotate-[-5deg] hover:rotate-0 transition-transform duration-700 shadow-2xl">
-              <img src="https://picsum.photos/seed/mohamed-dev-portrait/400/400.jpg" alt="Mohamed Mahmoud" class="w-full h-full object-cover">
-            </div>
-            <!-- Floating Badge -->
-            <div class="absolute -bottom-4 -left-4 bg-brand text-white rounded-2xl px-5 py-3 shadow-lg animate-float">
-              <div class="text-xs font-bold uppercase tracking-wider opacity-70">Codeforces</div>
-              <div class="font-display font-bold text-2xl">1436</div>
-              <div class="text-xs opacity-70">Specialist</div>
-            </div>
-            <!-- Floating Badge 2 -->
-            <div class="absolute -top-4 -right-4 bg-white text-dark rounded-2xl px-4 py-3 shadow-lg animate-float" style="animation-delay:1.5s">
-              <div class="text-xs font-bold uppercase tracking-wider text-slate-400">Problems</div>
-              <div class="font-display font-bold text-2xl text-brand">1000+</div>
-            </div>
-          </div>
+        <h1 class="hero-title">
+          <span class="split-line">Mohamed</span>
+          <span class="split-line accent-word">Mahmoud</span>
+        </h1>
+
+        <p class="hero-role">
+          <span class="role-tag">Frontend Developer</span>
+          <span class="role-divider">&</span>
+          <span class="role-tag">Competitive Programmer</span>
+        </p>
+
+        <p class="hero-desc">
+          I craft pixel-perfect interfaces and solve 1000+ algorithmic challenges. From real-time multiplayer games to collaborative editors — I build experiences that matter.
+        </p>
+
+        <div class="hero-actions">
+          <a href="#projects" class="cta-primary magnetic">
+            <span>Explore My Work</span>
+            <i class="fa-solid fa-arrow-right"></i>
+          </a>
+          <a href="#contact" class="cta-ghost magnetic">
+            Let's Talk
+          </a>
+        </div>
+
+        <div class="hero-socials">
+          <a href="https://github.com/mohammedmoud" target="_blank" class="social-btn" aria-label="GitHub">
+            <i class="fa-brands fa-github"></i>
+          </a>
+          <a href="https://www.linkedin.com/in/imomoud/" target="_blank" class="social-btn" aria-label="LinkedIn">
+            <i class="fa-brands fa-linkedin-in"></i>
+          </a>
+          <a href="https://codeforces.com/profile/MOUDX" target="_blank" class="social-btn" aria-label="Codeforces">
+            <i class="fa-solid fa-code"></i>
+          </a>
+          <a href="mailto:myworkmoud@gmail.com" class="social-btn" aria-label="Email">
+            <i class="fa-solid fa-envelope"></i>
+          </a>
         </div>
       </div>
-    </div>
 
-    <!-- Scroll Indicator -->
-    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 animate-fadeIn delay-700">
-      <div class="flex flex-col items-center gap-2 text-white/30">
-        <span class="text-[10px] uppercase tracking-widest font-bold">Scroll</span>
-        <div class="w-5 h-8 border border-white/20 rounded-full flex justify-center pt-1.5">
-          <div class="w-1 h-2 bg-white/40 rounded-full animate-bounce"></div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ABOUT SECTION -->
-  <section id="about" class="py-24 lg:py-32 bg-white relative overflow-hidden">
-    <div class="absolute top-0 right-0 w-96 h-96 bg-brand/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
-    <div class="max-w-7xl mx-auto px-6 lg:px-8 relative">
-      <div class="grid lg:grid-cols-2 gap-16 items-center">
-        <!-- Image Side -->
-        <div class="relative scroll-reveal">
-          <div class="relative rounded-3xl overflow-hidden aspect-[4/3] shadow-2xl">
-            <img src="https://picsum.photos/seed/coding-workspace-egypt/800/600.jpg" alt="Workspace" class="w-full h-full object-cover">
-            <div class="absolute inset-0 bg-gradient-to-t from-dark/40 to-transparent"></div>
-          </div>
-          <!-- Stats Overlay -->
-          <div class="absolute -bottom-6 -right-6 bg-dark text-white rounded-2xl p-6 shadow-2xl">
-            <div class="grid grid-cols-2 gap-4">
-              <div class="text-center">
-                <div class="font-display font-bold text-3xl text-brand">1000+</div>
-                <div class="text-[10px] uppercase tracking-widest text-white/50 mt-1">Problems</div>
-              </div>
-              <div class="text-center border-l border-white/10 pl-4">
-                <div class="font-display font-bold text-3xl text-purple-400">3+</div>
-                <div class="text-[10px] uppercase tracking-widest text-white/50 mt-1">Projects</div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Text Side -->
-        <div class="scroll-reveal" style="animation-delay:200ms">
-          <span class="text-xs font-bold uppercase tracking-widest text-brand">About Me</span>
-          <h2 class="font-display font-semibold text-4xl lg:text-5xl tracking-tight uppercase mt-4 leading-[0.95]">
-            Passionate about<br><span class="text-gradient">code & competition</span>
-          </h2>
-          <p class="mt-6 text-slate-500 font-light leading-relaxed text-lg">
-            I'm a Junior Frontend Developer based in Ismailia, Egypt, currently pursuing my Computer Science degree at Suez Canal University. I combine my web development skills with a deep love for competitive programming.
-          </p>
-          <p class="mt-4 text-slate-500 font-light leading-relaxed text-lg">
-            On platforms like Codeforces and AtCoder, I've sharpened my problem-solving abilities — solving over 1,000 problems and reaching Specialist rank. I bring that same analytical thinking to building clean, performant web applications.
-          </p>
-          <p class="mt-4 text-slate-500 font-light leading-relaxed text-lg">
-            As an ICPC community mentor, I guide newcomers in logical thinking and problem-solving — a role that continuously reinforces my own understanding.
-          </p>
-
-          <div class="mt-8 flex flex-wrap gap-3">
-            <span class="px-4 py-2 bg-slate-50 rounded-full text-sm font-medium text-slate-600">Frontend Dev</span>
-            <span class="px-4 py-2 bg-slate-50 rounded-full text-sm font-medium text-slate-600">Competitive Programmer</span>
-            <span class="px-4 py-2 bg-slate-50 rounded-full text-sm font-medium text-slate-600">ICPC Mentor</span>
-            <span class="px-4 py-2 bg-slate-50 rounded-full text-sm font-medium text-slate-600">CS Student</span>
-          </div>
-
-          <div class="mt-8 flex items-center gap-6">
-            <a href="#contact" class="inline-flex items-center gap-2 bg-dark text-white text-xs font-bold uppercase tracking-wider px-6 py-3 rounded-full hover:bg-brand transition-all duration-300">
-              Let's Talk
-              <iconify-icon icon="lucide:arrow-right" width="14" height="14"></iconify-icon>
-            </a>
-            <a href="https://codeforces.com/profile/mohamed" target="_blank" class="text-sm font-medium text-brand hover:text-purple-600 transition-colors flex items-center gap-1">
-              Codeforces Profile
-              <iconify-icon icon="lucide:external-link" width="14" height="14"></iconify-icon>
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- SKILLS SECTION -->
-  <section id="skills" class="py-24 lg:py-32 bg-slate-50 relative overflow-hidden">
-    <div class="absolute bottom-0 left-0 w-96 h-96 bg-purple-100 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2"></div>
-    <div class="max-w-7xl mx-auto px-6 lg:px-8 relative">
-      <div class="text-center max-w-2xl mx-auto scroll-reveal">
-        <span class="text-xs font-bold uppercase tracking-widest text-brand">Technical Skills</span>
-        <h2 class="font-display font-semibold text-4xl lg:text-5xl tracking-tight uppercase mt-4 leading-[0.95]">
-          My <span class="text-gradient">toolkit</span>
-        </h2>
-        <p class="mt-4 text-slate-500 font-light text-lg">Technologies and languages I work with daily.</p>
-      </div>
-
-      <div class="grid md:grid-cols-3 gap-6 mt-16">
-        <!-- Languages -->
-        <div class="bg-white rounded-3xl p-8 shadow-sm hover:shadow-xl card-glow transition-all duration-500 scroll-reveal">
-          <div class="w-12 h-12 bg-brand/10 rounded-2xl flex items-center justify-center mb-6">
-            <iconify-icon icon="lucide:code-2" width="24" height="24" class="text-brand"></iconify-icon>
-          </div>
-          <h3 class="font-display font-semibold text-xl tracking-tight uppercase">Languages</h3>
-          <div class="mt-6 space-y-4">
+      <div class="hero-right">
+        <div class="photo-frame">
+          <img src="imgs/professional_photo.jpg" alt="Mohamed Mahmoud" class="hero-photo" />
+          <div class="photo-ring"></div>
+          <!-- Floating badges -->
+          <div class="badge badge-cf">
+            <i class="fa-solid fa-star"></i>
             <div>
-              <div class="flex justify-between mb-1.5"><span class="text-sm font-medium text-slate-700">JavaScript / TypeScript</span><span class="text-xs text-slate-400">Proficient</span></div>
-              <div class="h-1.5 bg-slate-100 rounded-full overflow-hidden"><div class="skill-bar h-full bg-brand rounded-full" style="width:85%"></div></div>
+              <strong>1436</strong>
+              <small>CF Specialist</small>
             </div>
+          </div>
+          <div class="badge badge-probs">
+            <i class="fa-solid fa-fire"></i>
             <div>
-              <div class="flex justify-between mb-1.5"><span class="text-sm font-medium text-slate-700">HTML / CSS</span><span class="text-xs text-slate-400">Proficient</span></div>
-              <div class="h-1.5 bg-slate-100 rounded-full overflow-hidden"><div class="skill-bar h-full bg-brand rounded-full" style="width:90%"></div></div>
+              <strong>1000+</strong>
+              <small>Problems</small>
             </div>
+          </div>
+          <div class="badge badge-icpc">
+            <i class="fa-solid fa-users"></i>
             <div>
-              <div class="flex justify-between mb-1.5"><span class="text-sm font-medium text-slate-700">C / C++</span><span class="text-xs text-slate-400">Advanced</span></div>
-              <div class="h-1.5 bg-slate-100 rounded-full overflow-hidden"><div class="skill-bar h-full bg-purple-500 rounded-full" style="width:88%"></div></div>
-            </div>
-            <div>
-              <div class="flex justify-between mb-1.5"><span class="text-sm font-medium text-slate-700">Python</span><span class="text-xs text-slate-400">Intermediate</span></div>
-              <div class="h-1.5 bg-slate-100 rounded-full overflow-hidden"><div class="skill-bar h-full bg-indigo-400 rounded-full" style="width:70%"></div></div>
+              <strong>ICPC</strong>
+              <small>Mentor</small>
             </div>
           </div>
         </div>
+      </div>
+    </div>
 
-        <!-- Frameworks -->
-        <div class="bg-white rounded-3xl p-8 shadow-sm hover:shadow-xl card-glow transition-all duration-500 scroll-reveal delay-200">
-          <div class="w-12 h-12 bg-purple-100 rounded-2xl flex items-center justify-center mb-6">
-            <iconify-icon icon="lucide:layers" width="24" height="24" class="text-purple-600"></iconify-icon>
+    <!-- Scroll prompt -->
+    <div class="scroll-prompt">
+      <span>Scroll</span>
+      <div class="scroll-line"><span></span></div>
+    </div>
+  </section>
+
+  <!-- =========  STATS ROW  ========= -->
+  <section class="stats-section" id="stats">
+    <div class="stats-grid">
+      <div class="stat-item reveal">
+        <div class="stat-num" data-target="1436">0</div>
+        <div class="stat-label">Max CF Rating</div>
+        <div class="stat-sub">Specialist Rank</div>
+      </div>
+      <div class="stat-item reveal" style="--delay: 0.1s;">
+        <div class="stat-num" data-target="1000" data-suffix="+">0</div>
+        <div class="stat-label">Problems Solved</div>
+        <div class="stat-sub">Codeforces & AtCoder</div>
+      </div>
+      <div class="stat-item reveal" style="--delay: 0.2s;">
+        <div class="stat-num" data-target="3" data-suffix="+">0</div>
+        <div class="stat-label">Projects Built</div>
+        <div class="stat-sub">Real-world apps</div>
+      </div>
+      <div class="stat-item reveal" style="--delay: 0.3s;">
+        <div class="stat-num" data-target="2" data-suffix="+">0</div>
+        <div class="stat-label">Years Mentoring</div>
+        <div class="stat-sub">ICPC Community</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========  ABOUT  ========= -->
+  <section id="about" class="about-section section">
+    <div class="section-container">
+      <div class="about-grid">
+        <div class="about-text reveal">
+          <span class="label-tag">About Me</span>
+          <h2 class="section-heading">Turning algorithms <br /><em>into art.</em></h2>
+          <p>I'm a Junior Frontend Developer from <strong>Ismailia, Egypt</strong>, studying Computer Science at <strong>Suez Canal University</strong>. I blend deep algorithmic thinking from competitive programming with modern frontend craftsmanship.</p>
+          <p>As an <strong>ICPC SCU Community mentor</strong>, I guide the next generation of developers — reinforcing my belief that great engineers teach what they know.</p>
+          <div class="about-tags">
+            <span class="chip">Frontend Dev</span>
+            <span class="chip">CP Enthusiast</span>
+            <span class="chip">ICPC Mentor</span>
+            <span class="chip">CS Student</span>
+            <span class="chip">Open Source</span>
           </div>
-          <h3 class="font-display font-semibold text-xl tracking-tight uppercase">Frameworks</h3>
-          <div class="mt-6 space-y-4">
-            <div class="flex items-center gap-3 p-3 bg-slate-50 rounded-xl">
-              <iconify-icon icon="logos:react" width="24" height="24"></iconify-icon>
-              <div><div class="text-sm font-medium">React.js</div><div class="text-xs text-slate-400">Basics & Learning</div></div>
-            </div>
-            <div class="flex items-center gap-3 p-3 bg-slate-50 rounded-xl">
-              <iconify-icon icon="logos:nextjs-icon" width="24" height="24" style="filter:invert(1)"></iconify-icon>
-              <div><div class="text-sm font-medium">Next.js</div><div class="text-xs text-slate-400">Basics & Learning</div></div>
-            </div>
-            <div class="flex items-center gap-3 p-3 bg-slate-50 rounded-xl">
-              <iconify-icon icon="logos:socket-io" width="24" height="24"></iconify-icon>
-              <div><div class="text-sm font-medium">Socket.IO</div><div class="text-xs text-slate-400">Real-time Apps</div></div>
-            </div>
-            <div class="flex items-center gap-3 p-3 bg-slate-50 rounded-xl">
-              <iconify-icon icon="logos:pixijs" width="24" height="24"></iconify-icon>
-              <div><div class="text-sm font-medium">PIXI.js</div><div class="text-xs text-slate-400">Graphics & Games</div></div>
-            </div>
-          </div>
+          <a href="#contact" class="cta-primary magnetic" style="width: fit-content; margin-top: 2rem;">
+            <span>Let's work together</span>
+            <i class="fa-solid fa-arrow-right"></i>
+          </a>
         </div>
 
-        <!-- Tools & Education -->
-        <div class="bg-white rounded-3xl p-8 shadow-sm hover:shadow-xl card-glow transition-all duration-500 scroll-reveal delay-300">
-          <div class="w-12 h-12 bg-green-100 rounded-2xl flex items-center justify-center mb-6">
-            <iconify-icon icon="lucide:wrench" width="24" height="24" class="text-green-600"></iconify-icon>
+        <div class="about-bento reveal" style="--delay: 0.15s;">
+          <!-- Bento Grid Cards -->
+          <div class="bento-card bento-wide">
+            <div class="bento-icon"><i class="fa-solid fa-code"></i></div>
+            <h3>Problem Solver</h3>
+            <p>Solved 1000+ competitive programming problems, reaching Codeforces Specialist.</p>
           </div>
-          <h3 class="font-display font-semibold text-xl tracking-tight uppercase">Tools & Certs</h3>
-          <div class="mt-6 space-y-3">
-            <div class="flex items-center gap-3 p-3 bg-slate-50 rounded-xl">
-              <iconify-icon icon="logos:git-icon" width="24" height="24"></iconify-icon>
-              <span class="text-sm font-medium">Git & GitHub</span>
-            </div>
-            <div class="border-t border-slate-100 my-3"></div>
-            <div class="text-xs font-bold uppercase tracking-widest text-slate-400 mb-2">Certificates</div>
-            <div class="flex items-start gap-3 p-3 bg-slate-50 rounded-xl">
-              <iconify-icon icon="lucide:award" width="18" height="18" class="text-brand mt-0.5 shrink-0"></iconify-icon>
-              <div>
-                <div class="text-sm font-medium">CS50 — Harvard University</div>
-                <div class="text-xs text-slate-400">Introduction to Computer Science</div>
-              </div>
-            </div>
-            <div class="flex items-start gap-3 p-3 bg-slate-50 rounded-xl">
-              <iconify-icon icon="lucide:award" width="18" height="18" class="text-brand mt-0.5 shrink-0"></iconify-icon>
-              <div>
-                <div class="text-sm font-medium">Frontend Development — ITI</div>
-                <div class="text-xs text-slate-400">Information Technology Institute</div>
-              </div>
-            </div>
+          <div class="bento-card bento-tall">
+            <div class="bento-icon bento-icon-acc"><i class="fa-solid fa-trophy"></i></div>
+            <h3>Harvard CS50</h3>
+            <p>Certified by Harvard University in Introduction to Computer Science.</p>
+          </div>
+          <div class="bento-card">
+            <div class="bento-icon bento-icon-warn"><i class="fa-solid fa-users"></i></div>
+            <h3>Mentor</h3>
+            <p>2+ years guiding ICPC community newcomers.</p>
+          </div>
+          <div class="bento-card bento-dark">
+            <div class="bento-icon"><i class="fa-brands fa-github"></i></div>
+            <p class="bento-cta-text">Check my code →</p>
+            <a href="https://github.com/mohammedmoud" target="_blank" class="bento-link">@mohammedmoud</a>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- PROJECTS SECTION -->
-  <section id="projects" class="py-24 lg:py-32 bg-white relative overflow-hidden">
-    <div class="absolute top-1/2 right-0 w-96 h-96 bg-brand/5 rounded-full blur-3xl translate-x-1/2"></div>
-    <div class="max-w-7xl mx-auto px-6 lg:px-8 relative">
-      <div class="text-center max-w-2xl mx-auto scroll-reveal">
-        <span class="text-xs font-bold uppercase tracking-widest text-brand">Portfolio</span>
-        <h2 class="font-display font-semibold text-4xl lg:text-5xl tracking-tight uppercase mt-4 leading-[0.95]">
-          Featured <span class="text-gradient">projects</span>
-        </h2>
-        <p class="mt-4 text-slate-500 font-light text-lg">Real-world applications showcasing my skills.</p>
+  <!-- =========  SKILLS  ========= -->
+  <section id="skills" class="skills-section section">
+    <div class="section-container">
+      <div class="section-header reveal">
+        <span class="label-tag">Expertise</span>
+        <h2 class="section-heading">Skills & Toolkit</h2>
+        <p class="section-sub">The technologies I use to craft digital experiences.</p>
       </div>
 
-      <div class="mt-16 space-y-8">
-        <!-- Project 1: Maze of Death -->
-        <div class="project-card relative bg-slate-50 rounded-3xl overflow-hidden group scroll-reveal">
-          <div class="grid lg:grid-cols-2">
-            <div class="aspect-video lg:aspect-auto overflow-hidden">
-              <img src="https://picsum.photos/seed/maze-game-multiplayer/800/500.jpg" alt="Maze of Death" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+      <!-- Languages -->
+      <div class="skills-block reveal">
+        <div class="skills-block-label">
+          <i class="fa-solid fa-terminal"></i>
+          Languages
+        </div>
+        <div class="tech-icon-grid">
+          <div class="tech-icon-card">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-original.svg" alt="JavaScript" />
+            <span>JavaScript</span>
+          </div>
+          <div class="tech-icon-card">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/typescript/typescript-original.svg" alt="TypeScript" />
+            <span>TypeScript</span>
+          </div>
+          <div class="tech-icon-card">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/html5/html5-original.svg" alt="HTML5" />
+            <span>HTML5</span>
+          </div>
+          <div class="tech-icon-card">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/css3/css3-original.svg" alt="CSS3" />
+            <span>CSS3</span>
+          </div>
+          <div class="tech-icon-card">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/cplusplus/cplusplus-original.svg" alt="C++" />
+            <span>C++</span>
+          </div>
+          <div class="tech-icon-card">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/c/c-original.svg" alt="C" />
+            <span>C</span>
+          </div>
+          <div class="tech-icon-card">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" alt="Python" />
+            <span>Python</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Frameworks & Libraries -->
+      <div class="skills-block reveal" style="--delay:0.1s">
+        <div class="skills-block-label">
+          <i class="fa-solid fa-layer-group"></i>
+          Frameworks & Libraries
+        </div>
+        <div class="tech-icon-grid">
+          <div class="tech-icon-card">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg" alt="React" />
+            <span>React.js</span>
+          </div>
+          <div class="tech-icon-card">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nextjs/nextjs-original.svg" alt="Next.js" class="icon-invert" />
+            <span>Next.js</span>
+          </div>
+          <div class="tech-icon-card">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nodejs/nodejs-original.svg" alt="Node.js" />
+            <span>Node.js</span>
+          </div>
+          <div class="tech-icon-card">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/socketio/socketio-original.svg" alt="Socket.IO" class="icon-invert" />
+            <span>Socket.IO</span>
+          </div>
+          <!-- <div class="tech-icon-card">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/express/express-original.svg" alt="Express" class="icon-invert" />
+            <span>Express.js</span>
+          </div> -->
+          <div class="tech-icon-card">
+            <svg viewBox="0 0 32 32" style="width:44px;height:44px;" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="16" cy="16" r="16" fill="#e14d2a"/>
+              <text x="50%" y="56%" text-anchor="middle" dominant-baseline="middle" font-family="monospace" font-weight="900" font-size="11" fill="white">PIXI</text>
+            </svg>
+            <span>PIXI.js</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tools & Platforms -->
+      <div class="skills-block reveal" style="--delay:0.2s">
+        <div class="skills-block-label">
+          <i class="fa-solid fa-screwdriver-wrench"></i>
+          Tools & Platforms
+        </div>
+        <div class="tech-icon-grid">
+          <div class="tech-icon-card">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/git/git-original.svg" alt="Git" />
+            <span>Git</span>
+          </div>
+          <div class="tech-icon-card">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg" alt="GitHub" class="icon-invert" />
+            <span>GitHub</span>
+          </div>
+          <div class="tech-icon-card">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vscode/vscode-original.svg" alt="VS Code" />
+            <span>VS Code</span>
+          </div>
+          <!-- <div class="tech-icon-card">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/linux/linux-original.svg" alt="Linux" />
+            <span>Linux</span>
+          </div> -->
+          <!-- <div class="tech-icon-card">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/docker/docker-original.svg" alt="Docker" />
+            <span>Docker</span>
+          </div> -->
+          <div class="tech-icon-card">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/npm/npm-original-wordmark.svg" alt="npm" />
+            <span>npm</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Certifications -->
+      <div class="skills-block reveal" style="--delay:0.3s">
+        <div class="skills-block-label">
+          <i class="fa-solid fa-certificate"></i>
+          Certifications
+        </div>
+        <div class="certs-row">
+          <div class="cert-card">
+            <div class="cert-logo">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Harvard_University_logo.svg/320px-Harvard_University_logo.svg.png" alt="Harvard" />
             </div>
-            <div class="p-8 lg:p-12 flex flex-col justify-center">
-              <div class="flex items-center gap-3 mb-4">
-                <span class="px-3 py-1 bg-brand/10 text-brand text-xs font-bold uppercase tracking-wider rounded-full">Real-time</span>
-                <span class="px-3 py-1 bg-accent/10 text-accent text-xs font-bold uppercase tracking-wider rounded-full">Game</span>
-              </div>
-              <h3 class="font-display font-semibold text-2xl lg:text-3xl tracking-tight uppercase">Maze of Death</h3>
-              <p class="mt-3 text-slate-500 font-light leading-relaxed">
-                Real-time multiplayer maze game with dynamic player rendering, live leaderboard, and Socket.IO event handling using PIXI.js for high-performance graphics.
-              </p>
-              <div class="mt-5 space-y-2">
-                <div class="flex items-start gap-2">
-                  <iconify-icon icon="lucide:zap" width="16" height="16" class="text-brand mt-0.5 shrink-0"></iconify-icon>
-                  <span class="text-sm text-slate-600">Real-time player position updates with smooth rendering</span>
-                </div>
-                <div class="flex items-start gap-2">
-                  <iconify-icon icon="lucide:zap" width="16" height="16" class="text-brand mt-0.5 shrink-0"></iconify-icon>
-                  <span class="text-sm text-slate-600">Line-of-sight rendering & particle effects animations</span>
-                </div>
-                <div class="flex items-start gap-2">
-                  <iconify-icon icon="lucide:zap" width="16" height="16" class="text-brand mt-0.5 shrink-0"></iconify-icon>
-                  <span class="text-sm text-slate-600">Efficient client-server synchronization via Socket.IO</span>
-                </div>
-              </div>
-              <div class="mt-6 flex flex-wrap gap-2">
-                <span class="px-3 py-1 bg-white rounded-full text-xs font-medium text-slate-500 border border-slate-200">JavaScript</span>
-                <span class="px-3 py-1 bg-white rounded-full text-xs font-medium text-slate-500 border border-slate-200">Socket.IO</span>
-                <span class="px-3 py-1 bg-white rounded-full text-xs font-medium text-slate-500 border border-slate-200">PIXI.js</span>
-                <span class="px-3 py-1 bg-white rounded-full text-xs font-medium text-slate-500 border border-slate-200">Node.js</span>
-              </div>
-              <a href="#" class="mt-6 inline-flex items-center gap-2 text-sm font-bold text-brand hover:text-purple-600 transition-colors">
-                View Repository
-                <iconify-icon icon="lucide:arrow-up-right" width="16" height="16"></iconify-icon>
-              </a>
+            <div class="cert-info">
+              <strong>CS50 — Introduction to Computer Science</strong>
+              <span>Harvard University · Verified Certificate</span>
             </div>
+            <div class="cert-badge"><i class="fa-solid fa-check-circle"></i></div>
+          </div>
+          <div class="cert-card">
+            <div class="cert-logo cert-logo-iti">
+              <span>ITI</span>
+            </div>
+            <div class="cert-info">
+              <strong>Frontend Development</strong>
+              <span>Information Technology Institute · Egypt</span>
+            </div>
+            <div class="cert-badge"><i class="fa-solid fa-check-circle"></i></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- =========  PROJECTS  ========= -->
+  <section id="projects" class="projects-section section">
+    <div class="section-container">
+      <div class="section-header reveal">
+        <span class="label-tag">Portfolio</span>
+        <h2 class="section-heading">Featured Work</h2>
+        <p class="section-sub">Real-world applications that showcase my skills.</p>
+      </div>
+
+      <!-- Project 1 -->
+      <article class="project reveal">
+        <div class="project-media">
+          <div class="project-media-inner">
+            <img src="videos/maze_of_death_demo.webp" alt="Maze of Death animated demo" />
+          </div>
+          <div class="project-num">01</div>
+        </div>
+        <div class="project-info">
+          <div class="project-meta">
+            <span class="project-badge">Real-time</span>
+            <span class="project-badge">Game</span>
+            <span class="project-badge accent">Socket.IO</span>
+          </div>
+          <h3 class="project-title">Maze of Death</h3>
+          <p class="project-desc">Real-time multiplayer maze game with dynamic player rendering, live leaderboard, line-of-sight mechanics, and particle effects — all powered by PIXI.js and Socket.IO.</p>
+          <ul class="project-points">
+            <li>Multiplayer synchronization with Socket.IO event handling</li>
+            <li>PIXI.js high-performance canvas graphics & particle systems</li>
+            <li>Live leaderboard & dynamic maze generation algorithms</li>
+          </ul>
+          <div class="tech-stack">
+            <span>JavaScript</span><span>Socket.IO</span><span>PIXI.js</span><span>Node.js</span>
+          </div>
+          <div class="project-links">
+            <a href="https://github.com/Codera101/Maze-of-Death" target="_blank" class="proj-link magnetic">
+              <i class="fa-brands fa-github"></i> View Source
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Project 2 -->
+      <article class="project project-reverse reveal">
+        <div class="project-media">
+          <div class="project-media-inner">
+            <iframe
+              src="videos/collab-demo.html"
+              title="Collaborative Editor Demo"
+              loading="lazy"
+              sandbox="allow-scripts allow-same-origin"
+            ></iframe>
+          </div>
+          <div class="project-num">02</div>
+        </div>
+        <div class="project-info">
+          <div class="project-meta">
+            <span class="project-badge">Collaboration</span>
+            <span class="project-badge accent">WebSockets</span>
+          </div>
+          <h3 class="project-title">Collaborative Editor</h3>
+          <p class="project-desc">A real-time collaborative text editor enabling multiple users to write and edit simultaneously, with instant sync and conflict resolution across all connected clients.</p>
+          <ul class="project-points">
+            <li>Socket.IO-based real-time bi-directional communication</li>
+            <li>Concurrent edit-state consistency across all active clients</li>
+            <li>Instant synchronization without page refresh</li>
+          </ul>
+          <div class="tech-stack">
+            <span>JavaScript</span><span>Socket.IO</span><span>Node.js</span><span>HTML/CSS</span>
+          </div>
+          <div class="project-links">
+            <a href="https://github.com/Mazen-Ghanaym/collaborative-online-editor" target="_blank" class="proj-link magnetic">
+              <i class="fa-brands fa-github"></i> View Source
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Project 3 -->
+      <article class="project reveal">
+        <div class="project-media">
+          <div class="project-media-inner">
+            <img src="videos/online_book_shop_demo.webp" alt="Online Book Shop animated demo" />
+          </div>
+          <div class="project-num">03</div>
+        </div>
+        <div class="project-info">
+          <div class="project-meta">
+            <span class="project-badge">E-Commerce</span>
+            <span class="project-badge accent">Responsive</span>
+          </div>
+          <h3 class="project-title">Online Book Shop</h3>
+          <p class="project-desc">Full-featured e-commerce bookstore with multi-page layout, user authentication, dynamic catalog browsing, and a complete shopping cart checkout flow.</p>
+          <ul class="project-points">
+            <li>User authentication & session management</li>
+            <li>Dynamic book catalog with filtering & search</li>
+            <li>Complete shopping cart & checkout pipeline</li>
+          </ul>
+          <div class="tech-stack">
+            <span>HTML</span><span>CSS</span><span>JavaScript</span>
+          </div>
+          <div class="project-links">
+            <a href="https://github.com/Mazen-Ghanaym/Online-Book-Shop" target="_blank" class="proj-link magnetic">
+              <i class="fa-brands fa-github"></i> View Source
+            </a>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- =========  EXPERIENCE  ========= -->
+  <section id="experience" class="experience-section section">
+    <div class="section-container">
+      <div class="section-header reveal">
+        <span class="label-tag">Journey</span>
+        <h2 class="section-heading">Experience & Milestones</h2>
+      </div>
+
+      <div class="timeline reveal">
+        <div class="timeline-line"></div>
+
+        <div class="timeline-item">
+          <div class="tl-dot"></div>
+          <div class="tl-date">Jul 2023 — Present</div>
+          <div class="tl-card">
+            <div class="tl-icon"><i class="fa-solid fa-users"></i></div>
+            <h3>IT Member — ICPC SCU Community</h3>
+            <p>Mentor and instructor for newcomers and juniors, guiding them in problem-solving and logical thinking. Creating programming problems to test and improve analytical abilities.</p>
           </div>
         </div>
 
-        <!-- Project 2: Collaborative Editor -->
-        <div class="project-card relative bg-slate-50 rounded-3xl overflow-hidden group scroll-reveal delay-200">
-          <div class="grid lg:grid-cols-2">
-            <div class="p-8 lg:p-12 flex flex-col justify-center order-2 lg:order-1">
-              <div class="flex items-center gap-3 mb-4">
-                <span class="px-3 py-1 bg-green-500/10 text-green-600 text-xs font-bold uppercase tracking-wider rounded-full">Collaboration</span>
-                <span class="px-3 py-1 bg-blue-500/10 text-blue-600 text-xs font-bold uppercase tracking-wider rounded-full">Real-time</span>
-              </div>
-              <h3 class="font-display font-semibold text-2xl lg:text-3xl tracking-tight uppercase">Collaborative Editor</h3>
-              <p class="mt-3 text-slate-500 font-light leading-relaxed">
-                A collaborative text editor enabling real-time multi-user editing with instant content synchronization across all connected clients.
-              </p>
-              <div class="mt-5 space-y-2">
-                <div class="flex items-start gap-2">
-                  <iconify-icon icon="lucide:zap" width="16" height="16" class="text-green-500 mt-0.5 shrink-0"></iconify-icon>
-                  <span class="text-sm text-slate-600">Socket.IO-based real-time communication</span>
-                </div>
-                <div class="flex items-start gap-2">
-                  <iconify-icon icon="lucide:zap" width="16" height="16" class="text-green-500 mt-0.5 shrink-0"></iconify-icon>
-                  <span class="text-sm text-slate-600">Concurrent edit state consistency across clients</span>
-                </div>
-                <div class="flex items-start gap-2">
-                  <iconify-icon icon="lucide:zap" width="16" height="16" class="text-green-500 mt-0.5 shrink-0"></iconify-icon>
-                  <span class="text-sm text-slate-600">Instant content sync with conflict resolution</span>
-                </div>
-              </div>
-              <div class="mt-6 flex flex-wrap gap-2">
-                <span class="px-3 py-1 bg-white rounded-full text-xs font-medium text-slate-500 border border-slate-200">JavaScript</span>
-                <span class="px-3 py-1 bg-white rounded-full text-xs font-medium text-slate-500 border border-slate-200">Socket.IO</span>
-                <span class="px-3 py-1 bg-white rounded-full text-xs font-medium text-slate-500 border border-slate-200">HTML/CSS</span>
-              </div>
-              <a href="#" class="mt-6 inline-flex items-center gap-2 text-sm font-bold text-green-600 hover:text-green-700 transition-colors">
-                View Repository
-                <iconify-icon icon="lucide:arrow-up-right" width="16" height="16"></iconify-icon>
-              </a>
-            </div>
-            <div class="aspect-video lg:aspect-auto overflow-hidden order-1 lg:order-2">
-              <img src="https://picsum.photos/seed/collab-editor-realtime/800/500.jpg" alt="Collaborative Editor" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
-            </div>
+        <div class="timeline-item">
+          <div class="tl-dot"></div>
+          <div class="tl-date">Oct 2022 — Present</div>
+          <div class="tl-card">
+            <div class="tl-icon"><i class="fa-solid fa-graduation-cap"></i></div>
+            <h3>CS Student — Suez Canal University</h3>
+            <p>Pursuing a Bachelor's degree in Computer Sciences. Active in the competitive programming and web development communities.</p>
           </div>
         </div>
 
-        <!-- Project 3: Book Shop -->
-        <div class="project-card relative bg-slate-50 rounded-3xl overflow-hidden group scroll-reveal delay-300">
-          <div class="grid lg:grid-cols-2">
-            <div class="aspect-video lg:aspect-auto overflow-hidden">
-              <img src="https://picsum.photos/seed/bookshop-ecommerce-modern/800/500.jpg" alt="Book Shop" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
-            </div>
-            <div class="p-8 lg:p-12 flex flex-col justify-center">
-              <div class="flex items-center gap-3 mb-4">
-                <span class="px-3 py-1 bg-amber-500/10 text-amber-600 text-xs font-bold uppercase tracking-wider rounded-full">E-Commerce</span>
-                <span class="px-3 py-1 bg-indigo-500/10 text-indigo-600 text-xs font-bold uppercase tracking-wider rounded-full">Full Stack</span>
-              </div>
-              <h3 class="font-display font-semibold text-2xl lg:text-3xl tracking-tight uppercase">Book Shop</h3>
-              <p class="mt-3 text-slate-500 font-light leading-relaxed">
-                Responsive e-commerce bookstore platform featuring multi-page layout with user authentication, book catalog browsing, and shopping cart checkout functionality.
-              </p>
-              <div class="mt-5 space-y-2">
-                <div class="flex items-start gap-2">
-                  <iconify-icon icon="lucide:zap" width="16" height="16" class="text-amber-500 mt-0.5 shrink-0"></iconify-icon>
-                  <span class="text-sm text-slate-600">Multi-page responsive layout with clean UI</span>
-                </div>
-                <div class="flex items-start gap-2">
-                  <iconify-icon icon="lucide:zap" width="16" height="16" class="text-amber-500 mt-0.5 shrink-0"></iconify-icon>
-                  <span class="text-sm text-slate-600">User authentication & session management</span>
-                </div>
-                <div class="flex items-start gap-2">
-                  <iconify-icon icon="lucide:zap" width="16" height="16" class="text-amber-500 mt-0.5 shrink-0"></iconify-icon>
-                  <span class="text-sm text-slate-600">Shopping cart with checkout flow</span>
-                </div>
-              </div>
-              <div class="mt-6 flex flex-wrap gap-2">
-                <span class="px-3 py-1 bg-white rounded-full text-xs font-medium text-slate-500 border border-slate-200">HTML</span>
-                <span class="px-3 py-1 bg-white rounded-full text-xs font-medium text-slate-500 border border-slate-200">CSS</span>
-                <span class="px-3 py-1 bg-white rounded-full text-xs font-medium text-slate-500 border border-slate-200">JavaScript</span>
-              </div>
-              <a href="#" class="mt-6 inline-flex items-center gap-2 text-sm font-bold text-amber-600 hover:text-amber-700 transition-colors">
-                View Repository
-                <iconify-icon icon="lucide:arrow-up-right" width="16" height="16"></iconify-icon>
-              </a>
-            </div>
+        <div class="timeline-item">
+          <div class="tl-dot"></div>
+          <div class="tl-date">Ongoing</div>
+          <div class="tl-card">
+            <div class="tl-icon tl-gold"><i class="fa-solid fa-trophy"></i></div>
+            <h3>Competitive Programming</h3>
+            <p>Reached <strong>Codeforces Specialist</strong> with max rating <strong>1436</strong>. Solved over <strong>1000+ problems</strong> demonstrating deep algorithmic expertise and consistency.</p>
           </div>
         </div>
+
+        <div class="timeline-item">
+          <div class="tl-dot"></div>
+          <div class="tl-date">Certified</div>
+          <div class="tl-card">
+            <div class="tl-icon"><i class="fa-solid fa-certificate"></i></div>
+            <h3>Harvard CS50 + ITI Frontend</h3>
+            <p>Completed Harvard University's CS50 Introduction to Computer Science and the ITI Frontend Development certification program.</p>
+          </div>
+        </div>
+
       </div>
     </div>
   </section>
 
-  <!-- ACHIEVEMENTS & EXPERIENCE SECTION -->
-  <section id="achievements" class="py-24 lg:py-32 bg-dark text-white relative overflow-hidden">
-    <div class="absolute top-0 left-0 w-96 h-96 bg-brand/20 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2"></div>
-    <div class="absolute bottom-0 right-0 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl translate-x-1/2 translate-y-1/2"></div>
+  <!-- =========  CONTACT  ========= -->
+  <section id="contact" class="contact-section section">
+    <div class="section-container">
+      <div class="contact-wrapper reveal">
+        <div class="contact-glow"></div>
 
-    <div class="max-w-7xl mx-auto px-6 lg:px-8 relative">
-      <div class="text-center max-w-2xl mx-auto scroll-reveal">
-        <span class="text-xs font-bold uppercase tracking-widest text-brand">Journey</span>
-        <h2 class="font-display font-semibold text-4xl lg:text-5xl tracking-tight uppercase mt-4 leading-[0.95]">
-          Achievements &<br><span class="text-gradient">Experience</span>
-        </h2>
-      </div>
+        <div class="contact-left">
+          <span class="label-tag">Get In Touch</span>
+          <h2 class="section-heading">Let's build <br /><em>something great.</em></h2>
+          <p>Open to new opportunities, collaborations, or just a friendly chat about algorithms and web dev.</p>
 
-      <div class="grid lg:grid-cols-2 gap-16 mt-16">
-        <!-- Achievements -->
-        <div class="scroll-reveal">
-          <h3 class="font-display font-semibold text-xl tracking-tight uppercase text-white/40 mb-8">Competitive Programming</h3>
-          <div class="space-y-6">
-            <div class="relative pl-8 border-l-2 border-brand/30">
-              <div class="absolute left-0 top-0 w-4 h-4 bg-brand rounded-full -translate-x-1/2 ring-4 ring-dark"></div>
-              <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6">
-                <div class="flex items-center gap-3 mb-2">
-                  <iconify-icon icon="lucide:trophy" width="20" height="20" class="text-yellow-400"></iconify-icon>
-                  <h4 class="font-display font-semibold text-lg uppercase">Codeforces Specialist</h4>
-                </div>
-                <p class="text-white/60 font-light">Reached Specialist rank with a maximum rating of <span class="text-white font-medium">1436</span> on Codeforces.</p>
-              </div>
-            </div>
-            <div class="relative pl-8 border-l-2 border-brand/30">
-              <div class="absolute left-0 top-0 w-4 h-4 bg-purple-500 rounded-full -translate-x-1/2 ring-4 ring-dark"></div>
-              <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6">
-                <div class="flex items-center gap-3 mb-2">
-                  <iconify-icon icon="lucide:flame" width="20" height="20" class="text-orange-400"></iconify-icon>
-                  <h4 class="font-display font-semibold text-lg uppercase">1000+ Problems Solved</h4>
-                </div>
-                <p class="text-white/60 font-light">Solved over 1,000 problems on Codeforces, demonstrating consistent dedication and growth.</p>
-              </div>
-            </div>
-            <div class="relative pl-8 border-l-2 border-white/10">
-              <div class="absolute left-0 top-0 w-4 h-4 bg-white/20 rounded-full -translate-x-1/2 ring-4 ring-dark"></div>
-              <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6">
-                <div class="flex items-center gap-3 mb-2">
-                  <iconify-icon icon="lucide:graduation-cap" width="20" height="20" class="text-brand"></iconify-icon>
-                  <h4 class="font-display font-semibold text-lg uppercase">Harvard CS50</h4>
-                </div>
-                <p class="text-white/60 font-light">Completed CS50 — Harvard's Introduction to Computer Science certification.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Experience -->
-        <div class="scroll-reveal delay-200">
-          <h3 class="font-display font-semibold text-xl tracking-tight uppercase text-white/40 mb-8">Experience</h3>
-          <div class="space-y-6">
-            <div class="relative pl-8 border-l-2 border-accent/30">
-              <div class="absolute left-0 top-0 w-4 h-4 bg-accent rounded-full -translate-x-1/2 ring-4 ring-dark"></div>
-              <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6">
-                <div class="flex items-center justify-between mb-2">
-                  <h4 class="font-display font-semibold text-lg uppercase">IT Member — ICPC SCU Community</h4>
-                </div>
-                <span class="text-xs font-bold uppercase tracking-widest text-brand">Jul 2023 – Present</span>
-                <p class="text-white/60 font-light mt-3">Mentor and instructor for newcomers and juniors, guiding them in problem solving and logical thinking.</p>
-                <p class="text-white/60 font-light mt-2">Create programming problems to test and improve students' analytical abilities.</p>
-              </div>
-            </div>
-            <div class="relative pl-8 border-l-2 border-white/10">
-              <div class="absolute left-0 top-0 w-4 h-4 bg-white/20 rounded-full -translate-x-1/2 ring-4 ring-dark"></div>
-              <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6">
-                <div class="flex items-center justify-between mb-2">
-                  <h4 class="font-display font-semibold text-lg uppercase">CS Student — Suez Canal University</h4>
-                </div>
-                <span class="text-xs font-bold uppercase tracking-widest text-brand">Oct 2022 – Present</span>
-                <p class="text-white/60 font-light mt-3">Bachelor's degree in Computer Sciences. Active in the competitive programming and development communities.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Stats Row -->
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mt-20 scroll-reveal delay-300">
-        <div class="text-center p-6 bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl">
-          <div class="font-display font-bold text-4xl text-brand">1436</div>
-          <div class="text-xs uppercase tracking-widest text-white/40 mt-2">Max Rating</div>
-        </div>
-        <div class="text-center p-6 bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl">
-          <div class="font-display font-bold text-4xl text-purple-400">1000+</div>
-          <div class="text-xs uppercase tracking-widest text-white/40 mt-2">Problems Solved</div>
-        </div>
-        <div class="text-center p-6 bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl">
-          <div class="font-display font-bold text-4xl text-accent">3+</div>
-          <div class="text-xs uppercase tracking-widest text-white/40 mt-2">Projects Built</div>
-        </div>
-        <div class="text-center p-6 bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl">
-          <div class="font-display font-bold text-4xl text-green-400">2+</div>
-          <div class="text-xs uppercase tracking-widest text-white/40 mt-2">Years Mentoring</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- CONTACT SECTION -->
-  <section id="contact" class="py-24 lg:py-32 bg-white relative overflow-hidden">
-    <div class="absolute top-0 left-1/2 w-96 h-96 bg-brand/5 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2"></div>
-    <div class="max-w-7xl mx-auto px-6 lg:px-8 relative">
-      <div class="grid lg:grid-cols-2 gap-16">
-        <!-- Left -->
-        <div class="scroll-reveal">
-          <span class="text-xs font-bold uppercase tracking-widest text-brand">Get in Touch</span>
-          <h2 class="font-display font-semibold text-4xl lg:text-5xl tracking-tight uppercase mt-4 leading-[0.95]">
-            Let's build<br><span class="text-gradient">something great</span>
-          </h2>
-          <p class="mt-6 text-slate-500 font-light text-lg leading-relaxed">
-            I'm always open to new opportunities, collaborations, or just a friendly chat about code and competitive programming.
-          </p>
-
-          <div class="mt-10 space-y-6">
-            <a href="mailto:myworkmoud@gmail.com" class="flex items-center gap-4 group">
-              <div class="w-12 h-12 bg-brand/10 rounded-2xl flex items-center justify-center group-hover:bg-brand group-hover:text-white transition-all duration-300">
-                <iconify-icon icon="lucide:mail" width="20" height="20" class="text-brand group-hover:text-white transition-colors"></iconify-icon>
-              </div>
+          <div class="contact-items">
+            <a href="mailto:myworkmoud@gmail.com" class="contact-item">
+              <div class="contact-icon"><i class="fa-solid fa-envelope"></i></div>
               <div>
-                <div class="text-xs text-slate-400 uppercase tracking-wider font-bold">Email</div>
-                <div class="text-slate-700 font-medium group-hover:text-brand transition-colors">myworkmoud@gmail.com</div>
+                <small>Email</small>
+                <span>myworkmoud@gmail.com</span>
               </div>
             </a>
-            <a href="tel:+201127749797" class="flex items-center gap-4 group">
-              <div class="w-12 h-12 bg-brand/10 rounded-2xl flex items-center justify-center group-hover:bg-brand group-hover:text-white transition-all duration-300">
-                <iconify-icon icon="lucide:phone" width="20" height="20" class="text-brand group-hover:text-white transition-colors"></iconify-icon>
-              </div>
+            <a href="tel:+201127749797" class="contact-item">
+              <div class="contact-icon"><i class="fa-solid fa-phone"></i></div>
               <div>
-                <div class="text-xs text-slate-400 uppercase tracking-wider font-bold">Phone</div>
-                <div class="text-slate-700 font-medium group-hover:text-brand transition-colors">(+20) 1127749797</div>
+                <small>Phone</small>
+                <span>(+20) 1127749797</span>
               </div>
             </a>
-            <div class="flex items-center gap-4">
-              <div class="w-12 h-12 bg-brand/10 rounded-2xl flex items-center justify-center">
-                <iconify-icon icon="lucide:map-pin" width="20" height="20" class="text-brand"></iconify-icon>
-              </div>
+            <div class="contact-item">
+              <div class="contact-icon"><i class="fa-solid fa-map-pin"></i></div>
               <div>
-                <div class="text-xs text-slate-400 uppercase tracking-wider font-bold">Location</div>
-                <div class="text-slate-700 font-medium">Ismailia, Egypt</div>
+                <small>Location</small>
+                <span>Ismailia, Egypt</span>
               </div>
             </div>
           </div>
 
-          <!-- Social -->
-          <div class="mt-10 flex items-center gap-4">
-            <a href="https://github.com/mohamed" target="_blank" class="w-11 h-11 bg-slate-100 hover:bg-dark hover:text-white rounded-xl flex items-center justify-center text-slate-500 transition-all duration-300">
-              <iconify-icon icon="lucide:github" width="18" height="18"></iconify-icon>
+          <div class="contact-socials">
+            <a href="https://github.com/mohammedmoud" target="_blank" class="social-btn">
+              <i class="fa-brands fa-github"></i>
             </a>
-            <a href="https://linkedin.com/in/mohamed" target="_blank" class="w-11 h-11 bg-slate-100 hover:bg-brand hover:text-white rounded-xl flex items-center justify-center text-slate-500 transition-all duration-300">
-              <iconify-icon icon="lucide:linkedin" width="18" height="18"></iconify-icon>
+            <a href="https://www.linkedin.com/in/imomoud/" target="_blank" class="social-btn">
+              <i class="fa-brands fa-linkedin-in"></i>
             </a>
-            <a href="https://codeforces.com/profile/mohamed" target="_blank" class="w-11 h-11 bg-slate-100 hover:bg-accent hover:text-white rounded-xl flex items-center justify-center text-slate-500 transition-all duration-300">
-              <iconify-icon icon="lucide:code-2" width="18" height="18"></iconify-icon>
+            <a href="https://codeforces.com/profile/MOUDX" target="_blank" class="social-btn">
+              <i class="fa-solid fa-code"></i>
             </a>
           </div>
         </div>
 
-        <!-- Right: Contact Form -->
-        <div class="scroll-reveal delay-200">
-          <form id="contactForm" class="bg-slate-50 rounded-3xl p-8 lg:p-10">
-            <div class="space-y-5">
-              <div>
-                <label class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-2">Your Name</label>
-                <input type="text" required placeholder="John Doe" class="w-full bg-white border border-slate-200 rounded-xl px-5 py-3.5 text-sm text-slate-700 placeholder:text-slate-300 focus:outline-none focus:ring-2 focus:ring-brand/30 focus:border-brand transition-all">
-              </div>
-              <div>
-                <label class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-2">Your Email</label>
-                <input type="email" required placeholder="john@example.com" class="w-full bg-white border border-slate-200 rounded-xl px-5 py-3.5 text-sm text-slate-700 placeholder:text-slate-300 focus:outline-none focus:ring-2 focus:ring-brand/30 focus:border-brand transition-all">
-              </div>
-              <div>
-                <label class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-2">Subject</label>
-                <input type="text" required placeholder="Project collaboration" class="w-full bg-white border border-slate-200 rounded-xl px-5 py-3.5 text-sm text-slate-700 placeholder:text-slate-300 focus:outline-none focus:ring-2 focus:ring-brand/30 focus:border-brand transition-all">
-              </div>
-              <div>
-                <label class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-2">Message</label>
-                <textarea required rows="4" placeholder="Tell me about your project or opportunity..." class="w-full bg-white border border-slate-200 rounded-xl px-5 py-3.5 text-sm text-slate-700 placeholder:text-slate-300 focus:outline-none focus:ring-2 focus:ring-brand/30 focus:border-brand transition-all resize-none"></textarea>
-              </div>
-              <button type="submit" class="w-full bg-dark text-white text-xs font-bold uppercase tracking-wider py-4 rounded-xl hover:bg-brand transition-all duration-300 hover:shadow-[0_0_30px_rgba(84,35,231,0.3)] flex items-center justify-center gap-2">
-                Send Message
-                <iconify-icon icon="lucide:send" width="14" height="14"></iconify-icon>
-              </button>
+        <div class="contact-right">
+          <form id="contact-form" class="contact-form">
+            <div class="form-group">
+              <label for="name">Your Name</label>
+              <input type="text" id="name" placeholder="John Doe" required />
             </div>
+            <div class="form-group">
+              <label for="email">Your Email</label>
+              <input type="email" id="email" placeholder="john@example.com" required />
+            </div>
+            <div class="form-group">
+              <label for="subject">Subject</label>
+              <input type="text" id="subject" placeholder="Project collaboration..." />
+            </div>
+            <div class="form-group">
+              <label for="message">Message</label>
+              <textarea id="message" rows="5" placeholder="Tell me about your project..." required></textarea>
+            </div>
+            <button type="submit" class="btn-submit magnetic">
+              <span>Send Message</span>
+              <i class="fa-solid fa-paper-plane"></i>
+            </button>
           </form>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- FOOTER -->
-  <footer class="bg-dark text-white py-12">
-    <div class="max-w-7xl mx-auto px-6 lg:px-8">
-      <div class="flex flex-col md:flex-row items-center justify-between gap-6">
-        <div class="font-display font-bold text-xl tracking-tight uppercase">
-          <span class="text-gradient">M.</span>Mahmoud
-        </div>
-        <div class="flex items-center gap-6">
-          <a href="https://github.com/mohamed" target="_blank" class="text-white/40 hover:text-white transition-colors"><iconify-icon icon="lucide:github" width="18" height="18"></iconify-icon></a>
-          <a href="https://linkedin.com/in/mohamed" target="_blank" class="text-white/40 hover:text-white transition-colors"><iconify-icon icon="lucide:linkedin" width="18" height="18"></iconify-icon></a>
-          <a href="https://codeforces.com/profile/mohamed" target="_blank" class="text-white/40 hover:text-white transition-colors"><iconify-icon icon="lucide:code-2" width="18" height="18"></iconify-icon></a>
-          <a href="mailto:myworkmoud@gmail.com" class="text-white/40 hover:text-white transition-colors"><iconify-icon icon="lucide:mail" width="18" height="18"></iconify-icon></a>
-        </div>
-        <p class="text-white/30 text-sm">© 2025 Mohamed Mahmoud. All rights reserved.</p>
+  <!-- Footer -->
+  <footer>
+    <div class="footer-inner">
+      <a href="#hero" class="nav-logo">MM<span class="dot">.</span></a>
+      <p class="footer-copy">© 2024 Mohamed Mahmoud. Built with ❤️ and caffeine.</p>
+      <div class="footer-socials">
+        <a href="https://github.com/mohammedmoud" target="_blank" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+        <a href="https://www.linkedin.com/in/imomoud/" target="_blank" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+        <a href="mailto:myworkmoud@gmail.com" aria-label="Email"><i class="fa-solid fa-envelope"></i></a>
       </div>
     </div>
   </footer>
@@ -728,87 +644,6 @@
   <!-- Toast -->
   <div id="toast" class="toast"></div>
 
-  <script>
-    // === NAVBAR SCROLL ===
-    const navbar = document.getElementById('navbar');
-    window.addEventListener('scroll', () => {
-      if (window.scrollY > 50) {
-        navbar.classList.add('bg-white/90', 'backdrop-blur-xl', 'shadow-sm');
-      } else {
-        navbar.classList.remove('bg-white/90', 'backdrop-blur-xl', 'shadow-sm');
-      }
-    });
-
-    // === MOBILE MENU ===
-    const menuBtn = document.getElementById('menuBtn');
-    const mobileMenu = document.getElementById('mobileMenu');
-    menuBtn.addEventListener('click', () => {
-      mobileMenu.classList.toggle('hidden');
-    });
-    document.querySelectorAll('.mobile-link').forEach(link => {
-      link.addEventListener('click', () => mobileMenu.classList.add('hidden'));
-    });
-
-    // === SCROLL REVEAL ===
-    const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('animate-slideIn');
-          observer.unobserve(entry.target);
-        }
-      });
-    }, observerOptions);
-    document.querySelectorAll('.scroll-reveal').forEach(el => {
-      el.style.opacity = '0';
-      observer.observe(el);
-    });
-
-    // === CONTACT FORM ===
-    document.getElementById('contactForm').addEventListener('submit', (e) => {
-      e.preventDefault();
-      showToast('Message sent successfully! (Connect a backend for real delivery)');
-      e.target.reset();
-    });
-
-    function showToast(msg) {
-      const toast = document.getElementById('toast');
-      toast.textContent = msg;
-      toast.classList.add('show');
-      setTimeout(() => toast.classList.remove('show'), 3500);
-    }
-
-    // === ACTIVE NAV LINK ===
-    const sections = document.querySelectorAll('section[id]');
-    const navLinks = document.querySelectorAll('nav a[href^="#"]');
-    window.addEventListener('scroll', () => {
-      let current = '';
-      sections.forEach(section => {
-        const top = section.offsetTop - 100;
-        if (window.scrollY >= top) current = section.getAttribute('id');
-      });
-      navLinks.forEach(link => {
-        link.classList.remove('text-dark', 'font-semibold');
-        if (link.getAttribute('href') === `#${current}` && !link.classList.contains('bg-dark')) {
-          link.classList.add('text-dark', 'font-semibold');
-        }
-      });
-    });
-
-    // === SMOOTH SKILL BAR ANIMATION ON SCROLL ===
-    const skillObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.querySelectorAll('.skill-bar').forEach(bar => {
-            const w = bar.style.width;
-            bar.style.width = '0%';
-            setTimeout(() => { bar.style.width = w; }, 100);
-          });
-          skillObserver.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.3 });
-    document.querySelectorAll('#skills .bg-white').forEach(card => skillObserver.observe(card));
-  </script>
+  <script src="script.js"></script>
 </body>
 </html>

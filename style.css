@@ -1535,7 +1535,7 @@ body:has(.magnetic:hover) #cursor-ring {
 
 .project-title {
   font-family: var(--font-head);
-  font-size: 2.2rem;
+  font-size: clamp(1.6rem, 5vw, 2.2rem);
   font-weight: 800;
   line-height: 1.1;
   margin-bottom: 1rem;

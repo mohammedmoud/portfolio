@@ -517,7 +517,7 @@ body:has(.magnetic:hover) #cursor-ring {
   margin-bottom: 1.5rem;
 }
 .split-line {
-  display: block;
+  display: inline-block;
   animation: fadeSlideIn 0.9s ease forwards;
   animation-fill-mode: both;
 }

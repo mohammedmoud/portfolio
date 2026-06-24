@@ -1393,14 +1393,17 @@ footer {
 }
 
 @media (max-width: 480px) {
+  .section-container { padding: 0 1.25rem; }
   .stats-grid { grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .stat-item { padding: 1.5rem 1rem; }
   .stat-num { font-size: 1.8rem; }
   .hero-title { font-size: clamp(2.2rem, 10vw, 3rem); }
+  .hero-desc { font-size: 0.95rem; }
   .hero-actions { flex-direction: column; align-items: stretch; width: 100%; }
   .hero-actions a { width: 100%; justify-content: center; }
   
-  .contact-wrapper { padding: 2rem 1.5rem; }
-  .footer-inner { flex-direction: column; text-align: center; }
+  .contact-wrapper { padding: 2rem 1.25rem; }
+  .footer-inner { flex-direction: column; text-align: center; gap: 1.5rem; }
   
   .photo-frame { width: 240px; height: 260px; }
   .badge-cf { right: -10px; bottom: -10px; padding: 0.5rem 0.8rem; }
@@ -1415,4 +1418,24 @@ footer {
   
   .cert-card { flex-direction: column; text-align: center; padding: 1.25rem 1rem; gap: 0.8rem; }
   .cert-badge { margin-top: -0.5rem; }
+  
+  .tl-card { padding: 1.25rem; }
+  .timeline { padding-left: 2.5rem; }
+  .timeline-line { left: 8px; }
+  .tl-dot { left: -2.3rem; }
+  
+  .loader-text { font-size: 2.2rem; letter-spacing: 2px; }
+  .loader-bar { width: 160px; }
+}
+
+@media (max-width: 380px) {
+  .section-container { padding: 0 1rem; }
+  .stats-grid { grid-template-columns: 1fr; }
+  .hero-title { font-size: 2.2rem; }
+  .project-num { font-size: 3.5rem; top: -0.5rem; }
+  .tech-icon-card { width: 45%; }
+  .contact-wrapper { padding: 1.5rem 1rem; }
+  
+  .loader-text { font-size: 1.6rem; letter-spacing: 1px; }
+  .loader-bar { width: 130px; }
 }

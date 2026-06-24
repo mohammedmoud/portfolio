@@ -25,15 +25,24 @@ themeToggle.addEventListener('click', () => {
 });
 
 /* --------- LOADER --------- */
-window.addEventListener('load', () => {
+// Fallback if window load takes too long
+const fallbackTimer = setTimeout(() => {
+  hideLoader();
+}, 4000);
+
+function hideLoader() {
   const loader = document.getElementById('loader');
-  setTimeout(() => {
+  if (loader && !loader.classList.contains('hidden')) {
     loader.classList.add('hidden');
     document.body.style.overflow = '';
-    // Trigger first reveal pass after loader hides
     revealAll();
     animateCounters();
-  }, 1800);
+  }
+}
+
+window.addEventListener('load', () => {
+  clearTimeout(fallbackTimer);
+  setTimeout(hideLoader, 1800);
 });
 document.body.style.overflow = 'hidden'; // freeze until loaded
 
@@ -212,30 +221,39 @@ function showToast(msg, type = 'success') {
 }
 
 if (contactForm) {
-  contactForm.addEventListener('submit', (e) => {
+  contactForm.addEventListener('submit', async (e) => {
     e.preventDefault();
     const btn = contactForm.querySelector('.btn-submit');
     const origText = btn.innerHTML;
     btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Sending...';
     btn.disabled  = true;
 
-    // Simulate form submission (replace with real endpoint if needed)
-    setTimeout(() => {
-      btn.innerHTML = origText;
-      btn.disabled  = false;
-      contactForm.reset();
-      showToast('✓ Message sent! I\'ll reply soon.', 'success');
-    }, 1500);
+    try {
+      const endpoint = 'https://formspree.io/f/xkolowqb';
+
+      const response = await fetch(endpoint, {
+        method: 'POST',
+        body: new FormData(contactForm),
+        headers: {
+          'Accept': 'application/json'
+        }
+      });
+      
+      if (response.ok) {
+        showToast('✓ Message sent! I\'ll reply soon.', 'success');
+        contactForm.reset();
+      } else {
+        showToast('❌ Oops! There was a problem sending your message.', 'error');
+      }
+    } catch (error) {
+      showToast('❌ Oops! Network error. Please try again.', 'error');
+    } finally {
+      if (btn.innerHTML === '<i class="fa-solid fa-spinner fa-spin"></i> Sending...') {
+        btn.innerHTML = origText;
+        btn.disabled  = false;
+      }
+    }
   });
 }
 
-/* --------- SMOOTH SCROLL for HERO button --------- */
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-  anchor.addEventListener('click', (e) => {
-    const target = document.querySelector(anchor.getAttribute('href'));
-    if (target) {
-      e.preventDefault();
-      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-  });
-});
+

@@ -52,6 +52,7 @@
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 80px;
   font-size: 16px;
 }
 
@@ -111,6 +112,9 @@ body:has(.magnetic:hover) #cursor-ring {
 }
 @media (max-width: 768px) {
   #cursor-dot, #cursor-ring { display: none; }
+}
+@media (hover: none) and (pointer: coarse) {
+  #cursor-dot, #cursor-ring { display: none !important; }
 }
 
 /* ============================================================
@@ -1363,7 +1367,7 @@ footer {
   .hero-role { justify-content: center; }
   .hero-desc { margin: 0 auto 2.5rem; }
   .photo-frame { width: 300px; height: 320px; }
-  .badge-icpc { display: none; }
+  .scroll-prompt { display: none; }
 
   .about-grid { grid-template-columns: 1fr; }
 
@@ -1374,9 +1378,8 @@ footer {
 
   .contact-wrapper { grid-template-columns: 1fr; padding: 2.5rem; }
 
+  .stats-section { margin-top: 2rem; }
   .stats-grid { grid-template-columns: repeat(2, 1fr); }
-  .skills-bento { grid-template-columns: repeat(2, 1fr); }
-  .skill-lang { grid-column: 1 / -1; }
 }
 
 @media (max-width: 768px) {
@@ -1387,13 +1390,29 @@ footer {
   .stats-grid { grid-template-columns: repeat(2, 1fr); }
   .about-bento { grid-template-columns: 1fr; }
   .bento-tall { grid-row: auto; }
-  .skills-bento { grid-template-columns: 1fr; }
-  .skill-lang { grid-column: 1; }
 }
 
 @media (max-width: 480px) {
   .stats-grid { grid-template-columns: 1fr 1fr; gap: 1rem; }
-  .hero-actions { flex-direction: column; align-items: center; }
+  .stat-num { font-size: 1.8rem; }
+  .hero-title { font-size: clamp(2.2rem, 10vw, 3rem); }
+  .hero-actions { flex-direction: column; align-items: stretch; width: 100%; }
+  .hero-actions a { width: 100%; justify-content: center; }
+  
   .contact-wrapper { padding: 2rem 1.5rem; }
   .footer-inner { flex-direction: column; text-align: center; }
+  
+  .photo-frame { width: 240px; height: 260px; }
+  .badge-cf { right: -10px; bottom: -10px; padding: 0.5rem 0.8rem; }
+  .badge-probs { right: -15px; top: -10px; padding: 0.5rem 0.8rem; }
+  .badge-icpc { left: -15px; padding: 0.5rem 0.8rem; }
+  .badge strong { font-size: 0.9rem; }
+  .badge small { font-size: 0.65rem; }
+  
+  .btn-hire { padding: 0.45rem 1rem; font-size: 0.8rem; }
+  .nav-logo { font-size: 1.4rem; }
+  .nav-inner { gap: 1rem; padding: 0 1.25rem; }
+  
+  .cert-card { flex-direction: column; text-align: center; padding: 1.25rem 1rem; gap: 0.8rem; }
+  .cert-badge { margin-top: -0.5rem; }
 }
